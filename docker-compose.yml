@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  # Serviço do banco PostgreSQL
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: filmesdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Serviço da API FastAPI
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/filmesdb
+    volumes:
+      - .:/app
+
+volumes:
+  postgres_data:
