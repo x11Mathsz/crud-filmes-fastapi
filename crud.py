@@ -46,7 +46,7 @@ def delete_filme(db: Session, filme_id: int):
 def importar_filme_omdb(db: Session, titulo: str):
     """Importa um filme da API OMDb"""
     # Chave da API OMDb - OBTENHA UMA GRATUITA EM: http://www.omdbapi.com/apikey.aspx
-    api_key = "427c534"  # Chave de teste - substitua por uma real
+    api_key = "427c534"  # Chave de teste - 
     url = f"http://www.omdbapi.com/?t={titulo}&apikey={api_key}"
     
     try:
