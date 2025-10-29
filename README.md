@@ -35,6 +35,7 @@ crud_filmes/
 | `GET` | `/filmes` | Lista todos os filmes |
 | `POST` | `/filmes` | Adiciona um novo filme |
 | `GET` | `/filmes/{id}` | Busca filme por ID |
+| `PUT` | `/filmes/{id}` | Atualiza um filme existente |
 | `DELETE` | `/filmes/{id}` | Remove um filme |
 | `POST` | `/importar/{titulo}` | Importa filme da OMDb API |
 
@@ -99,12 +100,24 @@ curl -X POST "http://localhost:8000/filmes" \
 curl http://localhost:8000/filmes/1
 ```
 
-### 4. Importar filme da OMDb
+### 4. Atualizar um filme
+```bash
+curl -X PUT "http://localhost:8000/filmes/1" \
+     -H "Content-Type: application/json" \
+     -d '{
+       "titulo": "The Matrix",
+       "ano": "1999",
+       "genero": "Action, Sci-Fi, Thriller",
+       "nota": 8.9
+     }'
+```
+
+### 5. Importar filme da OMDb
 ```bash
 curl -X POST "http://localhost:8000/importar/Matrix"
 ```
 
-### 5. Deletar um filme
+### 6. Deletar um filme
 ```bash
 curl -X DELETE "http://localhost:8000/filmes/1"
 ```
